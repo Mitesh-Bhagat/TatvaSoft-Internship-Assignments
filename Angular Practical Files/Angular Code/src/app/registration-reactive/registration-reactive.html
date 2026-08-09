@@ -1,0 +1,152 @@
+<h2>Registration Form</h2>
+
+<form
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit()">
+
+    <label>Name</label>
+    <br>
+
+    <input
+        type="text"
+        formControlName="name">
+  
+
+    <div *ngIf="registrationForm.get('name')?.touched &&
+                registrationForm.get('name')?.invalid">
+
+        <!-- <small *ngIf="registrationForm.get('name')?.errors?.['required']">
+            Name is required.
+        </small> -->
+  <small
+*ngIf="registrationForm.get('name')?.errors?.['whitespace']
+&& registrationForm.get('name')?.touched">
+
+Name cannot contain only spaces.
+
+</small>
+    </div>
+
+    <br><br>
+
+    <label>Email</label>
+    <br>
+
+    <input
+        type="email"
+        formControlName="email">
+
+    <div *ngIf="registrationForm.get('email')?.touched &&
+                registrationForm.get('email')?.invalid">
+
+        <small *ngIf="registrationForm.get('email')?.errors?.['required']">
+            Email is required.
+        </small>
+
+        <small *ngIf="registrationForm.get('email')?.errors?.['email']">
+            Enter a valid email.
+        </small>
+
+    </div>
+
+    <br><br>
+
+    <label>Password</label>
+    <br>
+
+    <input
+        type="password"
+        formControlName="password">
+
+    <div *ngIf="registrationForm.get('password')?.touched &&
+                registrationForm.get('password')?.invalid">
+
+        <small *ngIf="registrationForm.get('password')?.errors?.['required']">
+            Password is required.
+        </small>
+
+        <small *ngIf="registrationForm.get('password')?.errors?.['minlength']">
+            Password must be at least 6 characters.
+        </small>
+
+    </div>
+
+    <br><br>
+
+<label>Confirm Password</label>
+
+<br>
+
+<input
+type="password"
+formControlName="confirmPassword">
+
+<div
+*ngIf="
+registrationForm.get('confirmPassword')?.touched
+&&
+registrationForm.get('confirmPassword')?.invalid">
+
+<small
+*ngIf="
+registrationForm.get('confirmPassword')
+?.errors?.['required']">
+
+Confirm Password is required.
+
+</small>
+<div
+*ngIf="
+registrationForm.errors?.['passwordMismatch']
+&&
+registrationForm.get('confirmPassword')?.touched">
+
+<small>
+
+Passwords do not match.
+
+</small>
+
+</div>
+</div>
+
+    <br><br>
+<hr>
+
+<h3>Skills</h3>
+
+<div formArrayName="skills">
+
+  <div *ngFor="let skill of skills.controls; let i = index">
+
+    <input
+      type="text"
+      [formControlName]="i"
+      placeholder="Enter Skill">
+
+    <button
+      type="button"
+      (click)="removeSkill(i)">
+      Remove
+    </button>
+
+    <br><br>
+
+  </div>
+
+</div>
+
+<button
+  type="button"
+  (click)="addSkill()">
+  Add Skill
+</button>
+
+<br><br>
+    <button
+        type="submit"
+        [disabled]="registrationForm.invalid">
+        Register
+    </button>
+
+</form>

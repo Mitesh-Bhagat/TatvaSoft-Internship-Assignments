@@ -1,0 +1,107 @@
+<h2>Student List</h2>
+
+<ul>
+  <li *ngFor="let student of students; let i = index">
+
+    {{ i + 1 }}.
+    {{ student.name }}
+    -
+    {{ student.marks }}
+
+    <span *ngIf="student.marks > 40; else failBlock">
+        Pass
+    </span>
+
+    <ng-template #failBlock>
+        Fail
+    </ng-template>
+
+  </li>
+</ul>
+<hr>
+
+<h2>Application Status</h2>
+
+<div [ngSwitch]="status">
+
+  <p *ngSwitchCase="'pending'">
+    ⏳ Your application is Pending.
+  </p>
+
+  <p *ngSwitchCase="'approved'">
+    ✅ Your application is Approved.
+  </p>
+
+  <p *ngSwitchCase="'rejected'">
+    ❌ Your application is Rejected.
+  </p>
+
+  <p *ngSwitchDefault>
+    Unknown Status
+  </p>
+
+  <hr>
+
+<h2>ngStyle and ngClass Example</h2>
+
+<div
+    [ngStyle]="{'background-color': isActive ? 'green' : 'red'}"
+    [ngClass]="{'active': isActive}">
+    Student Status
+</div>
+
+<hr>
+
+<h2>Custom Directive Example</h2>
+
+<h3 appHighlight>
+    Welcome to Angular
+</h3>
+
+<p appHighlight>
+    Hover over this paragraph to highlight it.
+</p>
+
+
+<hr>
+
+<h2>Date Pipe Example</h2>
+
+<p>Short Date: {{ today | date:'short' }}</p>
+
+<p>Full Date: {{ today | date:'fullDate' }}</p>
+
+<p>Custom Date: {{ today | date:'dd/MM/yyyy' }}</p>
+
+
+<hr>
+
+<h2>Currency Pipe Example</h2>
+
+<p>USD: {{ price | currency:'USD' }}</p>
+
+<p>INR: {{ price | currency:'INR' }}</p>
+
+<hr>
+
+<h2>Uppercase & Lowercase Pipe</h2>
+
+<p>Original: {{ studentName }}</p>
+
+<p>Uppercase: {{ studentName | uppercase }}</p>
+
+<p>Lowercase: {{ studentName | lowercase }}</p>
+
+
+<hr>
+
+<h2>Custom Pipe Example</h2>
+
+<p>Original:</p>
+
+<p>{{ description }}</p>
+
+<p>Truncated:</p>
+
+<p>{{ description | truncateText:30 }}</p>
+</div>  
